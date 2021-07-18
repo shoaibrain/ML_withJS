@@ -137,61 +137,6 @@ export default function Form() {
           </RadioGroup>
         </FormControl>
 
-        <Grid container className={classes.root} spacing={2}>
-          <Grid item xs={12}>
-            <Grid container justifyContent='flex-start'>
-              {/* Age */}
-              <Grid item className={classes.grid}>
-                {/* Age */}
-                <FormControl className={classes.field}>
-                  <FormLabel>Age</FormLabel>
-                  <TextField
-                    onChange={(e) => setAge(e.target.value)}
-                    className={classes.field}
-                    label='Age'
-                    variant='outlined'
-                    color='secondary'
-                    required
-                    error={ageError}
-                  />
-                </FormControl>
-              </Grid>
-              {/* Number of sibling/spouse */}
-              <Grid item className={classes.grid}>
-                {/* number of sibling/ spouse */}
-                <FormControl className={classes.field}>
-                  <FormLabel># of siblings / spouses</FormLabel>
-                  <TextField
-                    onChange={(e) => setAge(e.target.value)}
-                    className={classes.field}
-                    label='number'
-                    variant='outlined'
-                    color='secondary'
-                    required
-                    error={ageError}
-                  />
-                </FormControl>
-              </Grid>
-              {/* number of parent/ children */}
-              <Grid item className={classes.grid}>
-                <FormControl className={classes.field}>
-                  <FormLabel># of parents / children</FormLabel>
-                  <TextField
-                    onChange={(e) => setAge(e.target.value)}
-                    className={classes.field}
-                    label='number'
-                    variant='outlined'
-                    color='secondary'
-                    required
-                    error={ageError}
-                  />
-                </FormControl>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-        {/* last item */}
-
         <FormControl className={classes.field} variant='filled'>
           <FormLabel>Embark</FormLabel>
 
@@ -211,6 +156,52 @@ export default function Form() {
             <MenuItem value={'S'}>Southampton</MenuItem>
           </Select>
         </FormControl>
+        <Grid container>
+          <Grid item className={classes.grid} xs={12} sm={12} md={4}>
+            {/* Age */}
+            <FormControl className={classes.field}>
+              <FormLabel>Age</FormLabel>
+              <TextField
+                onChange={(e) => setAge(e.target.value)}
+                className={classes.field}
+                label='Age'
+                variant='outlined'
+                color='secondary'
+                required
+                error={ageError}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item className={classes.grid} xs={12} sm={12} md={4}>
+            {/* number of sibling/ spouse */}
+            <FormControl className={classes.field}>
+              <FormLabel># of siblings / spouses</FormLabel>
+              <TextField
+                onChange={(e) => setAge(e.target.value)}
+                className={classes.field}
+                label='number'
+                variant='outlined'
+                color='secondary'
+                required
+                error={ageError}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item className={classes.grid} xs={12} sm={12} md={4}>
+            <FormControl className={classes.field}>
+              <FormLabel># of parents / children</FormLabel>
+              <TextField
+                onChange={(e) => setAge(e.target.value)}
+                className={classes.field}
+                label='number'
+                variant='outlined'
+                color='secondary'
+                required
+                error={ageError}
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
 
         <Button
           type='submit'
