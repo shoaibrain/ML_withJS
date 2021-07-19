@@ -49,36 +49,65 @@ const useStyles = makeStyles({
 
 export default function Form() {
   const classes = useStyles()
-  const [title, setTitle] = useState('')
-  const [details, setDetails] = useState('')
-  const [sex, setSex] = useState('female')
-  const [age, setAge] = useState('female')
-  const [embark, setEmbark] = useState('None')
-  const [ticketClass, setTicketClass] = useState('1')
-  const history = useHistory()
 
-  const [titleError, setTitleError] = useState(false)
+  const [params, setParams] = useState({
+    userName: '',
+    userSex: '',
+    userAge: '',
+    userTicketClass: '',
+    userEmbark: '',
+    userSibSpouse: '',
+    userParChildren: '',
+  })
+
+  const history = useHistory()
+  //Errors
+  const [sexError, setSexError] = useState(false)
+  const [ticketClassErrorError, setTicketClassError] = useState(false)
+  const [embarkError, setEmbarkError] = useState(false)
   const [ageError, setAgeError] = useState(false)
-  const [detailsError, setDetailsErrors] = useState(false)
+  const [sibSpouseError, setSibSpouseError] = useState(false)
+  const [parChildrenError, setParChildrenError] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setTitleError(false)
-    setDetailsErrors(false)
+    setSexError(false)
+    setTicketClassError(false)
+    setEmbarkError(false)
+    setAgeError(false)
+    setSibSpouseError(false)
+    setParChildrenError(false)
 
-    if (title === '') {
-      setTitleError(true)
+    if (params.userSex === '') {
+      setSexError(true)
     }
-    if (details === '') {
-      setDetailsErrors(true)
+    if (params.userAge === '') {
+      setAgeError(true)
     }
-    if (title && details) {
-      fetch('http://localhost:8000/notes', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({ title, details, sex }),
-      }).then(() => history.push('/'))
+    if (params.userTicketClass === '') {
+      setTicketClassError(true)
     }
+    if (params.userEmbark === '') {
+      setEmbarkError(true)
+    }
+    if (params.userSibSpouse === '') {
+      setSibSpouseError(true)
+    }
+    if (params.userParChildren === '') {
+      setParChildrenError(true)
+    }
+    // If all the inputs received from the user, call service
+    if (params) {
+      console.log(params)
+    }
+
+    // if (title && details) {
+    //   fetch('http://localhost:8000/notes', {
+    //     method: 'POST',
+    //     headers: { 'Content-type': 'application/json' },
+    //     body: JSON.stringify({ title, details, sex }),
+    //   }).then(() => history.push('/'))
+    // }
   }
   return (
     <Container>
@@ -93,9 +122,10 @@ export default function Form() {
 
         {/* inpput field two */}
         <TextField
-          onChange={(e) => setDetails(e.target.value)}
+          onChange={(e) => setParams({ ...params, userName: e.target.value })}
           className={classes.field}
           label='Name'
+          value={params.userName}
           variant='outlined'
           color='secondary'
           fullWidth
@@ -103,7 +133,13 @@ export default function Form() {
         {/* input Sex */}
         <FormControl className={classes.field}>
           <FormLabel>Sex</FormLabel>
-          <RadioGroup value={sex} onChange={(e) => setSex(e.target.value)}>
+          <RadioGroup
+            value={params.userSex}
+            onChange={(e) => {
+              setParams({ ...params, userSex: e.target.value })
+              console.log(e.target.value)
+            }}
+          >
             <FormControlLabel value='male' control={<Radio />} label='male' />
             <FormControlLabel
               value='female'
@@ -112,57 +148,78 @@ export default function Form() {
             />
           </RadioGroup>
         </FormControl>
-        {/* //inout ticket classes */}
-        <FormControl className={classes.field}>
-          <FormLabel>Ticket Class</FormLabel>
-          <RadioGroup
-            value={ticketClass}
-            onChange={(e) => setTicketClass(e.target.value)}
-          >
-            <FormControlLabel
-              value='1'
-              control={<Radio />}
-              label='first class (upper deck)'
-            />
-            <FormControlLabel
-              value='2'
-              control={<Radio />}
-              label='second class (middle deck)'
-            />
-            <FormControlLabel
-              value='3'
-              control={<Radio />}
-              label='third class (lower deck)'
-            />
-          </RadioGroup>
-        </FormControl>
 
-        <FormControl className={classes.field} variant='filled'>
-          <FormLabel>Embark</FormLabel>
+        <Grid container>
+          <Grid item className={classes.grid} xs={12} sm={12} md={6}>
+            {/* //input ticket classes */}
+            <FormControl className={classes.field}>
+              <FormLabel>Ticket Class</FormLabel>
+              <RadioGroup
+                value={params.userTicketClass}
+                onChange={(e) => {
+                  setParams({ ...params, userTicketClass: e.target.value })
+                  console.log(e.target.value)
+                }}
+              >
+                <FormControlLabel
+                  value='1'
+                  control={<Radio />}
+                  label='first class (upper deck)'
+                />
+                <FormControlLabel
+                  value='2'
+                  control={<Radio />}
+                  label='second class (middle deck)'
+                />
+                <FormControlLabel
+                  value='3'
+                  control={<Radio />}
+                  label='third class (lower deck)'
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
 
-          <br />
-          <Select
-            className={classes.select}
-            labelId='demo-simple-select-filled-label'
-            id='demo-simple-select-filled'
-            value={embark}
-            onChange={(e) => setEmbark(e.target.value)}
-          >
-            <MenuItem value='None'>
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={'C'}>Cherbourg</MenuItem>
-            <MenuItem value={'Q'}>Queenstown</MenuItem>
-            <MenuItem value={'S'}>Southampton</MenuItem>
-          </Select>
-        </FormControl>
+          <Grid item className={classes.grid} xs={12} sm={12} md={6}>
+            {/* //input ticket classes */}
+            <FormControl className={classes.field}>
+              <FormLabel>Embark port</FormLabel>
+              <RadioGroup
+                value={params.userEmbark}
+                onChange={(e) => {
+                  setParams({ ...params, userEmbark: e.target.value })
+                  console.log(e.target.value)
+                }}
+              >
+                <FormControlLabel
+                  value='C'
+                  control={<Radio />}
+                  label='Cherbourg'
+                />
+                <FormControlLabel
+                  value='Q'
+                  control={<Radio />}
+                  label='Queenstown'
+                />
+                <FormControlLabel
+                  value='S'
+                  control={<Radio />}
+                  label='Southampton'
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+        </Grid>
+
         <Grid container>
           <Grid item className={classes.grid} xs={12} sm={12} md={4}>
             {/* Age */}
             <FormControl className={classes.field}>
               <FormLabel>Age</FormLabel>
               <TextField
-                onChange={(e) => setAge(e.target.value)}
+                onChange={(e) =>
+                  setParams({ ...params, userAge: e.target.value })
+                }
                 className={classes.field}
                 label='Age'
                 variant='outlined'
@@ -177,7 +234,9 @@ export default function Form() {
             <FormControl className={classes.field}>
               <FormLabel># of siblings / spouses</FormLabel>
               <TextField
-                onChange={(e) => setAge(e.target.value)}
+                onChange={(e) =>
+                  setParams({ ...params, userSibSpouse: e.target.value })
+                }
                 className={classes.field}
                 label='number'
                 variant='outlined'
@@ -191,7 +250,9 @@ export default function Form() {
             <FormControl className={classes.field}>
               <FormLabel># of parents / children</FormLabel>
               <TextField
-                onChange={(e) => setAge(e.target.value)}
+                onChange={(e) =>
+                  setParams({ ...params, userParChildren: e.target.value })
+                }
                 className={classes.field}
                 label='number'
                 variant='outlined'
