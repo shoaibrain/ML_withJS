@@ -42,7 +42,7 @@ const useStyles = makeStyles({
     paddingTop: 50,
     textAlign: 'left',
     fontSize: 17,
-    color: '#616161',
+    color: 'inherit',
     marginBottom: 30,
   },
 })
