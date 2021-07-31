@@ -82,7 +82,7 @@ function Main(props) {
           onClick={() => console.log('home clicked')}
         >
           <ListItemIcon>
-            <AppsIcon />
+            <AppsIcon /> <a href='#'></a>
           </ListItemIcon>
           <ListItemText className={classes.itemText} primary='Home' />
         </ListItem>
@@ -93,9 +93,9 @@ function Main(props) {
           onClick={() => console.log('facts clicked')}
         >
           <ListItemIcon>
-            <MenuBookIcon />
+            <MenuBookIcon /> <a href='#'></a>
           </ListItemIcon>
-          <ListItemText className={classes.itemText} primary='facts' />
+          <ListItemText className={classes.itemText} primary='Facts' />
         </ListItem>
         {/* source */}
         <ListItem
@@ -103,8 +103,9 @@ function Main(props) {
           className={classes.mainbtn}
           onClick={() => console.log('source clicked')}
         >
+          <a href='https://github.com/shoaibrain/ML_withJS'></a>
           <ListItemIcon>
-            <GitHubIcon />
+            <GitHubIcon />{' '}
           </ListItemIcon>
           <ListItemText className={classes.itemText} primary='Source' />
         </ListItem>

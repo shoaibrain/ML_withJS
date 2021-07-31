@@ -5,8 +5,8 @@ import Facts from './components/Facts'
 function App() {
   return (
     <div className='App'>
-      {/* <Main /> */}
-      <Facts />
+      <Main />
+      {/* <Facts /> */}
     </div>
   )
 }
